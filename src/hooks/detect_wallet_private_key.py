@@ -14,8 +14,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     for filename in args.filenames:
         with open(filename, 'r') as f:
             lines = f.readlines()
-            if re.search("[0-9A-Fa-f]{64}", line) and not "noqa" in line for line in lines:
-                private_key_files.append(filename)
+            for line in lines:
+                if re.search("[0-9A-Fa-f]{64}", line) and not "noqa" in line:
+                    private_key_files.append(filename)
 
     if private_key_files:
         for private_key_file in private_key_files:
