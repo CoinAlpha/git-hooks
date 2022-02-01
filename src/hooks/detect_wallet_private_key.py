@@ -16,9 +16,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         with open(filename, 'r') as f:
             lines = f.readlines()
             for line in lines:
-                if filename in private_key_files:
-                    break
-                elif re.search("[0-9A-Fa-f]{64}", line):
+                if re.search("[0-9A-Fa-f]{64}", line):
                     whitelisted = [f"noqa: {allowed}" in line for allowed in WHITELIST]
                     if not any(whitelisted):
                         private_key_files.append(filename)
